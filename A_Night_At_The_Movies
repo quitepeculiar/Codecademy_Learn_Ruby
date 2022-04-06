@@ -1,0 +1,58 @@
+# From "Hashes and Symbols"
+
+movies = {
+  Amelie: 5,
+  Catfish: 4,
+  Rashomon: 4,
+  Chinatown: 3,
+  Mother: 5,
+  Breathless: 5,
+  Inception: 2,
+  Magnolia: 2,
+  Adaptiation: 3,
+  Trafic: 4,
+  Ran: 4,
+  Hamlet: 2,
+}
+puts "What would you like to do? \n add \n update \n display \n delete"
+choice = gets.chomp
+
+case choice
+  when "add"
+    puts "Please enter the name of a film."
+    title = gets.chomp 
+    if movies[title.to_sym].nil?
+      puts "How would you rate that film numerically on a scale of 1-5?"
+      rating = gets.chomp
+      movies[title.to_sym] = rating.to_i
+      puts "Film and rating added!"
+    else
+      puts "Film already exists in our hash. It has a rating of #{movies[title.to_sym]}."
+    end
+  when "update"
+    puts "Please enter the name of a film."
+    title = gets.chomp 
+    if movies[title.to_sym].nil?
+      puts "This film isn't currently in our database. Consider adding it!"
+    else
+      puts "Please enter a new rating for this film."
+      rating = gets.chomp
+      movies[title.to_sym] = rating.to_i
+    end
+  when "display"
+    puts "Here are some films with their corresponding ratings:"
+    movies.each do |title, rating|
+      puts "#{title}: #{rating}"
+    end
+    
+  when "delete"
+    puts "What is the title of the film you want to delete?"
+    title = gets.chomp
+    if movies[title.to_sym].nil?
+      puts "Sorry, that film's not in this database."
+    else
+      movies.delete(title.to_sym)
+    end
+  else
+    puts "Sorry, that's not a valid response!'"
+  end
